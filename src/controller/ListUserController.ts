@@ -5,7 +5,7 @@ import ListUser from '../models/listUser';
 class ListUserController {
   async getUser(request: Request, response: Response) {
     const token = request.headers.authorization as string;
-
+    const userId = request.params.id;
     if (!token) {
       return response.status(400).json({
         error: 'Error, access denied',
@@ -19,11 +19,10 @@ class ListUserController {
         error: 'Error,token invalid',
       });
     }
-    const listUser = new ListUser(auth.id);
-    const user = await listUser.listUser(auth.id);
-    console.log(user);
+    const listUser = new ListUser(userId);
+    const user = await listUser.listUser(userId);
 
-    response.status(200).json({ user });
+    response.status(200).send(user);
   }
 }
 

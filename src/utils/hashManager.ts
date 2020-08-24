@@ -4,13 +4,11 @@ class HashManager {
   async hash(text: string): Promise<string> {
     const rounds = Number(process.env.BCRYPT_COST);
     const salt = await bcrypt.genSalt(rounds);
-    const result = bcrypt.hash(text, salt);
-    return result;
+    return bcrypt.hash(text, salt);
   }
 
   async compare(text: string, cypherText: string) {
-    const result = await bcrypt.compare(text, cypherText);
-    return result;
+    return bcrypt.compare(text, cypherText);
   }
 }
 

@@ -6,7 +6,10 @@ class ListUser {
   }
 
   async listUser(id: string): Promise<any> {
-    const result = await connection('usuario').select('*').where(id).first();
+    const result = await connection('usuario')
+      .select('id', 'nome', 'email')
+      .where({ id })
+      .first();
     return result;
   }
 }
